@@ -1,12 +1,4 @@
-import { Route, Link, Routes, useParams } from 'react-router-dom';
-
-const Project = () => {
-  const params = useParams();
-  const { project_id } = params;
-  console.log({ params });
-
-  return <h2>Project {project_id}</h2>;
-};
+import { Route, Link, Routes } from 'react-router-dom';
 
 const Portfolio = () => {
   return (
@@ -14,15 +6,16 @@ const Portfolio = () => {
       <h1>Hola</h1>
       <ul>
         <li>
-          <Link to={`/portfolio/project-1`}>Project 1</Link>
+          <Link to={'/portfolio/project1'}>Project 1</Link>
         </li>
         <li>
-          <Link to={`/portfolio/project-2`}>Project 2</Link>
+          <Link to={'/portfolio/project2'}>Project 2</Link>
         </li>
       </ul>
       <div>
         <Routes>
-          <Route path=":project_id" element={<Project />} />
+          <Route path="/project1" element={<h1>Project 1</h1>} />
+          <Route path="/project2" element={<h1>Project 2</h1>} />
         </Routes>
       </div>
     </div>

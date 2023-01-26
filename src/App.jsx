@@ -1,35 +1,23 @@
-import { Route, Link, Routes, useParams } from 'react-router-dom';
+import { Route, Routes, Link, useLocation } from 'react-router-dom';
 
-const Project = () => {
-  const params = useParams();
-  const { project_id } = params;
-  console.log({ params });
-
-  return <h2>Project {project_id}</h2>;
-};
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Portfolio = () => {
   return (
-    <div>
-      <h1>Hola</h1>
-      <ul>
-        <li>
-          <Link to={`/portfolio/project-1`}>Project 1</Link>
-        </li>
-        <li>
-          <Link to={`/portfolio/project-2`}>Project 2</Link>
-        </li>
-      </ul>
-      <div>
-        <Routes>
-          <Route path=":project_id" element={<Project />} />
-        </Routes>
-      </div>
-    </div>
+    <>
+      <h1>I am the Portfolio</h1>
+    </>
   );
 };
 
 function App() {
+  const query = useQuery();
+  const chancho = query.get('chanchito');
+  const nombre = query.get('nombre');
+  console.log({ chancho, nombre });
+
   return (
     <div>
       <nav>
@@ -38,14 +26,18 @@ function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
             <Link to="/portfolio">Portfolio</Link>
           </li>
         </ul>
       </nav>
       <section>
         <Routes>
-          <Route path="/" element={<h1>Inicio</h1>} />
+          <Route path="/" element={<h1>Inicio {chancho}</h1>} />
           <Route path="/portfolio/*" element={<Portfolio />} />
+          <Route path="/profile/" element={<h1>Perfil</h1>} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </section>
